@@ -11,7 +11,7 @@ panel_title: Frigate
 slug: frigate-fa-beta
 description: NVR with realtime local object detection for IP cameras
 url: "https://github.com/blakeblackshear/frigate"
-image: ghcr.io/blakeblackshear/frigate
+image: docker.cnb.cool/frigate-cn/frigate
 startup: application
 boot: auto
 init: false
@@ -44,9 +44,13 @@ video: true
 full_access: true
 privileged:
   - PERFMON
+environment:
+  HF_ENDPOINT: "https://huggingface.mirror.frigate-cn.video"
+  GITHUB_ENDPOINT: "https://github.mirror.frigate-cn.video"
+  TF_KERAS_MOBILENET_V2_WEIGHTS_URL: "https://cnb.cool/frigate-cn/mirrors/storage.googleapis/-/git/raw/main/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_0.35_224_no_top.h5"
 schema:
   plus_api_key: password?
-  go2rtc_allow_arbitrary_exec: str?  
+  go2rtc_allow_arbitrary_exec: str?
 services:
   - "mqtt:want"
 arch:

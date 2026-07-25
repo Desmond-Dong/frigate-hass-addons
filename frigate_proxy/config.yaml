@@ -23,7 +23,10 @@ devices: []
 usb: false
 tmpfs: false
 full_access: false
-environment: {}
+environment:
+  HF_ENDPOINT: "https://huggingface.mirror.frigate-cn.video"
+  GITHUB_ENDPOINT: "https://github.mirror.frigate-cn.video"
+  TF_KERAS_MOBILENET_V2_WEIGHTS_URL: "https://cnb.cool/frigate-cn/mirrors/storage.googleapis/-/git/raw/main/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_0.35_224_no_top.h5"
 options:
   server: "http://frigate.local:5000"
   proxy_pass_host: true

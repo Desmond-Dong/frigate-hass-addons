@@ -48,6 +48,9 @@ privileged:
   - SYS_ADMIN
 environment:
   CONFIG_FILE: /config/frigate.yml
+  HF_ENDPOINT: "https://huggingface.mirror.frigate-cn.video"
+  GITHUB_ENDPOINT: "https://github.mirror.frigate-cn.video"
+  TF_KERAS_MOBILENET_V2_WEIGHTS_URL: "https://cnb.cool/frigate-cn/mirrors/storage.googleapis/-/git/raw/main/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_0.35_224_no_top.h5"
 schema:
   plus_api_key: password?
 services:
