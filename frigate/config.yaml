@@ -1,4 +1,4 @@
-name: Frigate
+name: Frigate CN
 version: 0.17.2
 breaking_versions:
   - 0.17.0

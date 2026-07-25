@@ -1,4 +1,4 @@
-name: Frigate (For old x86_64 CPU without AVX)
+name: Frigate (For old x86_64 CPU without AVX) CN
 version: 0.14.1
 panel_icon: "mdi:cctv"
 panel_title: Frigate
