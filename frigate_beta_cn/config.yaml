@@ -9,7 +9,7 @@ breaking_versions:
 panel_icon: "mdi:cctv"
 panel_title: Frigate
 slug: frigate-beta
-description: NVR with realtime local object detection for IP cameras
+description: 为 IP 摄像头提供实时本地目标检测的 NVR
 url: "https://github.com/blakeblackshear/frigate"
 image: docker.cnb.cool/frigate-cn/frigate
 startup: application
@@ -32,11 +32,11 @@ ports:
   1984/tcp: null
   1935/tcp: null
 ports_description:
-  8555/tcp: WebRTC over tcp
-  8555/udp: WebRTC over udp
-  8554/tcp: RTSP Restream
-  8971/tcp: Authenticated Web interface
-  5000/tcp: Unauthenticated Web interface (not required for Home Assistant Ingress)
+  8555/tcp: WebRTC（TCP）
+  8555/udp: WebRTC（UDP）
+  8554/tcp: RTSP 转流
+  8971/tcp: 需认证的 Web 界面
+  5000/tcp: 免认证的 Web 界面（Home Assistant Ingress 不需要）
   1984/tcp: go2rtc API
 host_network: false
 devices:

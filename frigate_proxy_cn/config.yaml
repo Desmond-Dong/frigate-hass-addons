@@ -3,7 +3,7 @@ version: 1.6
 panel_icon: "mdi:cctv"
 panel_title: Frigate
 slug: frigate-proxy
-description: Proxy addon for Frigate
+description: Frigate 的代理应用
 url: "https://github.com/blakeblackshear/frigate"
 startup: application
 boot: auto
@@ -17,7 +17,7 @@ panel_admin: false
 ports:
   5000/tcp: 5000
 ports_description:
-  5000/tcp: Web interface (not required for Home Assistant Ingress)
+  5000/tcp: Web 界面（Home Assistant Ingress 不需要）
 host_network: false
 devices: []
 usb: false

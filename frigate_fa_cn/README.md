@@ -1,16 +1,18 @@
-# Home Assistant Add-on: Frigate (Full Access)
+# Home Assistant 应用：Frigate 完全访问版（中国大陆优化版）
 
-Please reference the [release notes](https://github.com/blakeblackshear/frigate/releases) for breaking changes.
+这是专门针对中国大陆地区优化过的 Frigate 版本，内置 HuggingFace、GitHub 等模型下载源的国内镜像，无需特殊网络即可正常下载所需模型。
 
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armv7 Architecture][armv7-shield]
+请查阅 [发布说明](https://github.com/blakeblackshear/frigate/releases) 了解破坏性变更。
 
-NVR with realtime local object detection for IP cameras.
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armv7 架构][armv7-shield]
 
-You must create a config file as `config.yml` in your add-on configuration folder.
+为 IP 摄像头提供实时本地目标检测的 NVR。
 
-This version of the add-on requests full device access in order to turn off protection mode for those devices which don't work with protection mode enabled.
+你需要在应用配置目录下创建 `config.yml` 配置文件。
 
-[Documentation](https://docs.frigate.video)
+此版本的应用请求完整的设备访问权限，以便为那些在保护模式下无法正常工作的设备关闭保护模式。
+
+[文档](https://docs.frigate.video)
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
