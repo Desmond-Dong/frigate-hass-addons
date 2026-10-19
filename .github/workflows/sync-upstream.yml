@@ -31,11 +31,35 @@ jobs:
             exit 0
           fi
 
-          if git merge upstream/main --no-edit -m "chore: sync upstream updates"; then
-            echo "Merged cleanly."
-          else
+          if ! git merge upstream/main --no-edit -m "chore: sync upstream updates"; then
             echo "Conflicts detected, auto-resolving..."
-            python3 .github/scripts/resolve_conflicts.py
+            for f in $(git diff --name-only --diff-filter=U); do
+              case "$f" in
+                *.yaml) cfg=yes ;;
+                *)      cfg=no ;;
+              esac
+              awk -v cfg="$cfg" '
+                /^<<<<<<</ && mode == ""       { mode = "ours"; next }
+                /^=======$/ && mode == "ours"  { mode = "theirs"; next }
+                /^>>>>>>> / && mode == "theirs" {
+                  if (cfg == "yes") {
+                    for (i = 1; i <= no; i++) if (ours[i] !~ /^version:/) print ours[i]
+                    for (i = 1; i <= nt; i++) if (theirs[i] ~ /^version:/) print theirs[i]
+                  } else {
+                    for (i = 1; i <= nt; i++) print theirs[i]
+                  }
+                  mode = ""; no = 0; nt = 0; next
+                }
+                mode == "ours"   { ours[++no] = $0; next }
+                mode == "theirs" { theirs[++nt] = $0; next }
+                { print }
+              ' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+              if grep -q "^<<<<<<< " "$f"; then
+                echo "::error::Unresolved conflict markers remain in $f"
+                exit 1
+              fi
+              echo "resolved: $f"
+            done
             git add -A
             git commit -m "chore: sync upstream updates (conflicts auto-resolved)"
           fi
