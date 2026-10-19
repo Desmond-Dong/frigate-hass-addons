@@ -1,0 +1,46 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Merge upstream
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/blakeblackshear/frigate-hass-addons.git
+          git fetch upstream main
+
+          BEHIND=$(git rev-list --count HEAD..upstream/main)
+          echo "New upstream commits: $BEHIND"
+          echo "### Sync upstream" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$BEHIND" -eq 0 ]; then
+            echo "Already up to date, nothing to do." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          if git merge upstream/main --no-edit -m "chore: sync upstream updates"; then
+            echo "Merged cleanly."
+          else
+            echo "Conflicts detected, auto-resolving..."
+            python3 .github/scripts/resolve_conflicts.py
+            git add -A
+            git commit -m "chore: sync upstream updates (conflicts auto-resolved)"
+          fi
+
+          echo "Merged upstream commits:" >> "$GITHUB_STEP_SUMMARY"
+          git log --oneline HEAD^..upstream/main >> "$GITHUB_STEP_SUMMARY" || true
+
+          git push
